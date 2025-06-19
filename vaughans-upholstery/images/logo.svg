@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="60" viewBox="0 0 200 60">
+  <style>
+    .logo-text { font-family: Arial, sans-serif; font-weight: bold; }
+    .primary { fill: #3a4a5c; }
+    .secondary { fill: #c19a6b; }
+  </style>
+  <text x="10" y="40" class="logo-text primary" font-size="24">Vaughans</text>
+  <text x="120" y="40" class="logo-text secondary" font-size="24">Upholstery</text>
+</svg>

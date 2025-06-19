@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Vaughans Upholstery</title>
+    <meta name="description" content="Get in touch with Vaughans Upholstery for expert upholstery services. Contact us for quotes, inquiries, or to discuss your project.">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <style>
+        /* Page-specific styles */
+        .contact-section {
+            padding: var(--spacing-xl) 0;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+        }
+        
+        .contact-info-card {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-md);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            height: 100%;
+        }
+        
+        .contact-info-card h3 {
+            margin-bottom: var(--spacing-md);
+            position: relative;
+            padding-bottom: var(--spacing-xs);
+        }
+        
+        .contact-info-card h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--secondary-color);
+        }
+        
+        .contact-detail {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .contact-icon {
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+            margin-right: var(--spacing-sm);
+            min-width: 20px;
+        }
+        
+        .contact-text {
+            line-height: 1.5;
+        }
+        
+        .contact-form-container {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-md);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-md);
+        }
+        
+        .map-container {
+            height: 400px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            margin-top: var(--spacing-xl);
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        
+        .faq-section {
+            margin-top: var(--spacing-xl);
+        }
+        
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            margin-bottom: var(--spacing-md);
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-md);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .faq-question {
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+            color: var(--primary-color);
+        }
+        
+        .faq-answer {
+            color: var(--gray-dark);
+        }
+        
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-info-card {
+                margin-bottom: var(--spacing-md);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">Vaughans <span>Upholstery</span></a>
+                
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
+                    <li class="nav-item"><a href="gallery.html" class="nav-link">Gallery</a></li>
+                    <li class="nav-item"><a href="examples.html" class="nav-link">Examples</a></li>
+                    <li class="nav-item"><a href="contact.html" class="nav-link active">Contact</a></li>
+                </ul>
+                
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Banner -->
+    <section class="hero" style="height: 50vh; margin-top: 70px; background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/hero-images/hero-2.jpg');">
+        <div class="hero-content">
+            <h1 class="hero-title">Contact Us</h1>
+            <p class="hero-subtitle">Get in touch to discuss your upholstery needs</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            
+            <p class="text-center">We'd love to hear from you! Whether you have a question about our services, want to request a quote, or are ready to start your upholstery project, we're here to help.</p>
+            
+            <div class="contact-grid">
+                <div>
+                    <div class="contact-info-card">
+                        <h3>Contact Information</h3>
+                        
+                        <div class="contact-detail">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <strong>Address:</strong><br>
+                                89b Manukau Road,<br>
+                                Pukekohe, Auckland,<br> New Zealand
+                            </div>
+                        </div>
+                        
+                        <div class="contact-detail">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-text">
+                                <strong>Phone:</strong><br>
+                                (021) 588 380
+                            </div>
+                        </div>
+                        
+                        <div class="contact-detail">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-text">
+                                <strong>Email:</strong><br>
+                                vdwood@xtra.co.nz
+                            </div>
+                        </div>
+                        
+                        <div class="contact-detail">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="contact-text">
+                                <strong>Hours:</strong><br>
+                                Monday - Friday: 9am - 5pm<br>
+                                Saturday: Closed<br>
+                                Sunday: Closed
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form-container">
+                    <h3>Send Us a Message</h3>
+                    
+                    <form class="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Phone</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <input type="text" id="subject" name="subject">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="service">Service Interested In</label>
+                            <select id="service" name="service">
+                                <option value="">Select a service</option>
+                                <option value="residential">Residential Upholstery</option>
+                                <option value="commercial">Commercial Upholstery</option>
+                                <option value="custom">Custom Upholstery</option>
+                                <option value="antique">Antique Restoration</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Map -->
+<!--             <div class="map-container"> -->
+                <!-- This is a placeholder for a Google Map. In a real implementation, you would use an actual Google Maps embed code -->
+<!--                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d102256.85257927516!2d174.70442059777908!3d-36.86862229356184!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6d0d47fb5a9ce6fb%3A0x500ef6143a29917!2sAuckland%2C%20New%20Zealand!5e0!3m2!1sen!2sus!4v1620123456789!5m2!1sen!2sus" allowfullscreen="" loading="lazy"></iframe>
+            </div> -->
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section section-padding" style="background-color: var(--gray-light);">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <h4 class="faq-question">How much does upholstery typically cost?</h4>
+                    <p class="faq-answer">Upholstery costs vary depending on the size of the piece, the complexity of the work required, and the materials chosen. We provide detailed quotes after assessing your furniture, ensuring transparency in our pricing.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h4 class="faq-question">How long does an upholstery project take?</h4>
+                    <p class="faq-answer">Project timelines depend on the complexity of the work and our current schedule. Simple projects may take 1-2 weeks, while more complex restorations can take 3-4 weeks. We'll provide a specific timeline when quoting your project.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h4 class="faq-question">Do you provide fabric selection assistance?</h4>
+                    <p class="faq-answer">Yes! We offer expert guidance on fabric selection, helping you choose materials that match your style preferences, durability needs, and budget. We can provide samples and recommendations based on your specific requirements.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h4 class="faq-question">Can you restore antique furniture?</h4>
+                    <p class="faq-answer">Absolutely. We specialize in antique restoration, using traditional techniques and appropriate materials to preserve the character and value of your antique pieces while ensuring they're functional and beautiful.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h4 class="faq-question">Do you offer pickup and delivery services?</h4>
+                    <p class="faq-answer">Yes, we offer pickup and delivery services within the Auckland area. For larger items or customers outside our standard delivery area, we can arrange special transportation at an additional cost.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="section-padding">
+        <div class="container text-center">
+            <h2>Ready to Transform Your Furniture?</h2>
+            <p>Contact us today to get started on your upholstery project.</p>
+            <a href="tel:+6421588380" class="btn">Call 021 588 380</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">Vaughans <span>Upholstery</span></div>
+                    <p>Quality upholstery services with attention to detail and craftsmanship. Bringing new life to your furniture since 2010.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="examples.html">Examples</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="services.html">Residential Upholstery</a></li>
+                        <li><a href="services.html">Commercial Upholstery</a></li>
+                        <li><a href="services.html">Custom Upholstery</a></li>
+                        <li><a href="services.html">Furniture Restoration</a></li>
+                        <li><a href="services.html">Fabric Selection</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Vaughans Upholstery. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+</body>
+</html>

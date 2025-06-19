@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Vaughans Upholstery</title>
+    <meta name="description" content="Learn about Vaughans Upholstery, our history, values, and commitment to quality craftsmanship in upholstery services.">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <style>
+        /* Page-specific styles */
+        .about-section {
+            padding: var(--spacing-xl) 0;
+        }
+        
+        .about-intro {
+            max-width: 800px;
+            margin: 0 auto var(--spacing-xl);
+            text-align: center;
+        }
+        
+        .about-story {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .about-image {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-text h3 {
+            margin-bottom: var(--spacing-md);
+            position: relative;
+            padding-bottom: var(--spacing-xs);
+        }
+        
+        .about-text h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--secondary-color);
+        }
+        
+        .values-section {
+            background-color: var(--gray-light);
+            padding: var(--spacing-xl) 0;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-md);
+        }
+        
+        .value-card {
+            background-color: var(--white);
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        
+        .value-icon {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .value-title {
+            margin-bottom: var(--spacing-xs);
+            color: var(--primary-color);
+        }
+        
+        .team-section {
+            padding: var(--spacing-xl) 0;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+        }
+        
+        .team-member {
+            text-align: center;
+        }
+        
+        .team-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto var(--spacing-md);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .team-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .team-name {
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .team-role {
+            color: var(--secondary-color);
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .timeline-section {
+            background-color: var(--gray-light);
+            padding: var(--spacing-xl) 0;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--secondary-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+        
+        .timeline-item {
+            padding: var(--spacing-md) 0;
+            position: relative;
+        }
+        
+        .timeline-content {
+            position: relative;
+            width: 45%;
+            padding: var(--spacing-md);
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: auto;
+        }
+        
+        .timeline-year {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+            line-height: 60px;
+            font-weight: 600;
+            z-index: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-content {
+                width: calc(100% - 80px);
+                margin-left: 80px !important;
+            }
+            
+            .timeline-year {
+                left: 31px;
+                transform: translateY(-50%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">Vaughans <span>Upholstery</span></a>
+                
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="about.html" class="nav-link active">About</a></li>
+                    <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
+                    <li class="nav-item"><a href="gallery.html" class="nav-link">Gallery</a></li>
+                    <li class="nav-item"><a href="examples.html" class="nav-link">Examples</a></li>
+                    <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+                
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Banner -->
+    <section class="hero" style="height: 50vh; margin-top: 70px; background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/hero-images/hero-2.jpg');">
+        <div class="hero-content">
+            <h1 class="hero-title">About Us</h1>
+            <p class="hero-subtitle">Craftsmanship, quality, and attention to detail</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="container">
+            <div class="about-intro">
+                <h2 class="section-title">Our Story</h2>
+                <p>At Vaughans Upholstery, we believe that quality craftsmanship is the foundation of exceptional upholstery. With years of experience and a passion for detail, we take pride in transforming tired furniture into stunning pieces that enhance your space.</p>
+            </div>
+            
+            <div class="about-story">
+                <div class="about-image">
+                    <img src="images/about.jpg" alt="Upholstery workshop with tools and materials">
+                </div>
+                
+                <div class="about-text">
+                    <h3>Craftsmanship & Tradition</h3>
+                    <p>Vaughans Upholstery was founded in 2010 with a simple mission: to provide exceptional upholstery services that combine traditional craftsmanship with modern techniques. What began as a small workshop has grown into a respected upholstery business serving residential and commercial clients throughout Auckland.</p>
+                    
+                    <p>Our founder, Vaughan, learned the art of upholstery through years of apprenticeship and practice. His dedication to quality and attention to detail forms the cornerstone of our business philosophy. Today, our team of skilled craftspeople continues this tradition, bringing expertise and passion to every project we undertake.</p>
+                    
+                    <p>We believe that furniture tells a story, and our work is about preserving and enhancing that story. Whether we're restoring a family heirloom or creating custom pieces for a commercial space, we approach each project with the same level of care and commitment to excellence.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values-section">
+        <div class="container">
+            <h2 class="section-title">Our Values</h2>
+            
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3 class="value-title">Quality</h3>
+                    <p>We never compromise on quality. From the materials we select to the techniques we employ, excellence is our standard.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-hands"></i>
+                    </div>
+                    <h3 class="value-title">Craftsmanship</h3>
+                    <p>We honor traditional upholstery techniques while embracing modern innovations to deliver the best results.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3 class="value-title">Passion</h3>
+                    <p>Our love for upholstery drives us to continuously improve and deliver work that exceeds expectations.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-user-friends"></i>
+                    </div>
+                    <h3 class="value-title">Customer Focus</h3>
+                    <p>We listen carefully to our clients' needs and work collaboratively to bring their vision to life.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <div class="container">
+            <h2 class="section-title">Meet Our Team</h2>
+            
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="team-image">
+                        <img src="images/about.jpg" alt="Vaughan - Founder & Master Upholsterer">
+                    </div>
+                    <h3 class="team-name">Vaughan</h3>
+                    <p class="team-role">Founder & Master Upholsterer</p>
+                    <p>With over 20 years of experience, Vaughan brings unparalleled expertise and vision to every project.</p>
+                </div>
+                
+                <div class="team-member">
+                    <div class="team-image">
+                        <img src="images/gallery/gallery-3.jpg" alt="Sarah - Senior Upholsterer">
+                    </div>
+                    <h3 class="team-name">Sarah</h3>
+                    <p class="team-role">Senior Upholsterer</p>
+                    <p>Sarah specializes in traditional techniques and has a keen eye for detail in restoration projects.</p>
+                </div>
+                
+                <div class="team-member">
+                    <div class="team-image">
+                        <img src="images/gallery/gallery-2.jpg" alt="Michael - Custom Design Specialist">
+                    </div>
+                    <h3 class="team-name">Michael</h3>
+                    <p class="team-role">Custom Design Specialist</p>
+                    <p>Michael's background in interior design helps clients visualize and create unique custom pieces.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="timeline-section">
+        <div class="container">
+            <h2 class="section-title">Our Journey</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">2010</div>
+                    <div class="timeline-content">
+                        <h3>The Beginning</h3>
+                        <p>Vaughans Upholstery was founded as a small workshop focusing on residential upholstery services.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">2013</div>
+                    <div class="timeline-content">
+                        <h3>Expanding Services</h3>
+                        <p>We expanded our services to include commercial upholstery, working with local restaurants and hotels.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">2015</div>
+                    <div class="timeline-content">
+                        <h3>New Workshop</h3>
+                        <p>Growing demand led to moving to a larger workshop and expanding our team of skilled craftspeople.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">2018</div>
+                    <div class="timeline-content">
+                        <h3>Custom Creations</h3>
+                        <p>We launched our custom upholstery service, creating bespoke pieces for discerning clients.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">2020</div>
+                    <div class="timeline-content">
+                        <h3>10 Year Anniversary</h3>
+                        <p>Celebrated a decade of quality craftsmanship and expanded our antique restoration services.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">2025</div>
+                    <div class="timeline-content">
+                        <h3>Today</h3>
+                        <p>Continuing our commitment to excellence while embracing sustainable practices and innovative techniques.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial -->
+    <section class="section-padding">
+        <div class="container text-center">
+            <h2 class="section-title">What Our Clients Say</h2>
+            
+            <div class="testimonial-card" style="max-width: 800px; margin: 0 auto;">
+                <p class="testimonial-text">"Working with Vaughans Upholstery has been an absolute pleasure. Their attention to detail and commitment to quality is evident in every piece they've restored for us. They've transformed our tired old furniture into stunning showpieces that we're proud to display in our home."</p>
+                <p class="testimonial-author">- James & Eleanor Wilson</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="section-padding" style="background-color: var(--primary-color); color: var(--white);">
+        <div class="container text-center">
+            <h2 style="color: var(--white);">Ready to Work With Us?</h2>
+            <p>Contact us today to discuss your upholstery project and experience our craftsmanship firsthand.</p>
+            <a href="contact.html" class="btn btn-secondary">Get in Touch</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">Vaughans <span>Upholstery</span></div>
+                    <p>Quality upholstery services with attention to detail and craftsmanship. Bringing new life to your furniture since 2010.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="examples.html">Examples</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="services.html">Residential Upholstery</a></li>
+                        <li><a href="services.html">Commercial Upholstery</a></li>
+                        <li><a href="services.html">Custom Upholstery</a></li>
+                        <li><a href="services.html">Furniture Restoration</a></li>
+                        <li><a href="services.html">Fabric Selection</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Vaughans Upholstery. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+</body>
+</html>

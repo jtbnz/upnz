@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services | Vaughans Upholstery</title>
+    <meta name="description" content="Explore our range of upholstery services including residential, commercial, and custom upholstery solutions.">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <style>
+        /* Page-specific styles */
+        .service-detail {
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .service-detail-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-lg);
+            align-items: center;
+        }
+        
+        .service-detail-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .service-detail-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+        
+        .service-features {
+            margin-top: var(--spacing-md);
+        }
+        
+        .service-features ul {
+            list-style: disc;
+            padding-left: var(--spacing-md);
+        }
+        
+        .service-features li {
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+        
+        .process-step {
+            background-color: var(--white);
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: var(--secondary-color);
+            color: var(--white);
+            border-radius: 50%;
+            line-height: 40px;
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        @media (max-width: 768px) {
+            .service-detail-content {
+                flex-direction: column;
+            }
+            
+            .service-detail-image {
+                order: -1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">Vaughans <span>Upholstery</span></a>
+                
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="services.html" class="nav-link active">Services</a></li>
+                    <li class="nav-item"><a href="gallery.html" class="nav-link">Gallery</a></li>
+                    <li class="nav-item"><a href="examples.html" class="nav-link">Examples</a></li>
+                    <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+                
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Banner -->
+    <section class="hero" style="height: 50vh; margin-top: 70px; background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/hero-images/hero-2.jpg');">
+        <div class="hero-content">
+            <h1 class="hero-title">Our Services</h1>
+            <p class="hero-subtitle">Expert upholstery solutions for every need</p>
+        </div>
+    </section>
+
+    <!-- Services Overview -->
+    <section class="section-padding">
+        <div class="container">
+            <h2 class="section-title">What We Offer</h2>
+            
+            <p class="text-center">At Vaughans Upholstery, we provide a comprehensive range of upholstery services to meet all your needs. Whether you're looking to restore a family heirloom, refresh your home furniture, or outfit a commercial space, our skilled craftsmen deliver exceptional results with attention to detail and quality materials.</p>
+            
+            <!-- Residential Upholstery -->
+            <div class="service-detail">
+                <h3>Residential Upholstery</h3>
+                
+                <div class="service-detail-content">
+                    <div class="service-detail-text">
+                        <p>Transform your home furniture with our expert residential upholstery services. We work with a wide range of furniture pieces, from sofas and armchairs to ottomans and dining chairs, bringing new life to your favorite items.</p>
+                        
+                        <p>Our residential upholstery service includes a consultation to understand your vision, fabric selection assistance, and meticulous craftsmanship to ensure your furniture not only looks beautiful but provides lasting comfort.</p>
+                        
+                        <div class="service-features">
+                            <h4>What We Upholster:</h4>
+                            <ul>
+                                <li>Sofas and sectionals</li>
+                                <li>Armchairs and recliners</li>
+                                <li>Dining chairs</li>
+                                <li>Ottomans and footstools</li>
+                                <li>Headboards and bed frames</li>
+                                <li>Window seats and cushions</li>
+                                <li>Antique and vintage furniture</li>
+                            </ul>
+                        </div>
+                        
+                        <a href="contact.html" class="btn">Get a Quote</a>
+                    </div>
+                    
+                    <div class="service-detail-image">
+                        <img src="images/services/service-1.jpg" alt="Residential upholstery example">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Commercial Upholstery -->
+            <div class="service-detail">
+                <h3>Commercial Upholstery</h3>
+                
+                <div class="service-detail-content">
+                    <div class="service-detail-text">
+                        <p>Create a lasting impression with our commercial upholstery services. We understand the unique demands of commercial spaces and provide durable, stylish solutions that withstand high-traffic environments while maintaining their appearance.</p>
+                        
+                        <p>Our commercial clients benefit from our expertise in selecting appropriate fabrics that meet safety standards and durability requirements. We work efficiently to minimize disruption to your business operations.</p>
+                        
+                        <div class="service-features">
+                            <h4>Commercial Clients We Serve:</h4>
+                            <ul>
+                                <li>Restaurants and cafes</li>
+                                <li>Hotels and hospitality venues</li>
+                                <li>Offices and corporate spaces</li>
+                                <li>Retail environments</li>
+                                <li>Healthcare facilities</li>
+                                <li>Educational institutions</li>
+                                <li>Entertainment venues</li>
+                            </ul>
+                        </div>
+                        
+                        <a href="contact.html" class="btn">Get a Quote</a>
+                    </div>
+                    
+                    <div class="service-detail-image">
+                        <img src="images/services/service-2.jpg" alt="Commercial upholstery example">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Custom Upholstery -->
+            <div class="service-detail">
+                <h3>Custom Upholstery</h3>
+                
+                <div class="service-detail-content">
+                    <div class="service-detail-text">
+                        <p>Bring your vision to life with our custom upholstery services. Whether you're looking for unique designs, special materials, or bespoke furniture pieces, our skilled craftsmen can create exactly what you're imagining.</p>
+                        
+                        <p>Our custom service begins with a detailed consultation to understand your requirements, followed by design proposals and material recommendations. We handle every aspect of the process, from concept to completion.</p>
+                        
+                        <div class="service-features">
+                            <h4>Custom Services Include:</h4>
+                            <ul>
+                                <li>Bespoke furniture creation</li>
+                                <li>Custom fabric selection and sourcing</li>
+                                <li>Specialized techniques and finishes</li>
+                                <li>Unique design elements</li>
+                                <li>One-of-a-kind pieces</li>
+                                <li>Collaborative design process</li>
+                                <li>Specialty materials and applications</li>
+                            </ul>
+                        </div>
+                        
+                        <a href="contact.html" class="btn">Get a Quote</a>
+                    </div>
+                    
+                    <div class="service-detail-image">
+                        <img src="images/services/service-3.jpg" alt="Custom upholstery example">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Process -->
+    <section class="section-padding" style="background-color: var(--gray-light);">
+        <div class="container">
+            <h2 class="section-title">Our Process</h2>
+            
+            <p class="text-center">We follow a thorough process to ensure every upholstery project meets our high standards of quality and craftsmanship. Here's how we transform your furniture:</p>
+            
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h4>Consultation</h4>
+                    <p>We begin with a detailed consultation to understand your needs, preferences, and vision for your furniture.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h4>Assessment</h4>
+                    <p>Our experts examine your furniture to assess its condition and determine the best approach for upholstery.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h4>Material Selection</h4>
+                    <p>We help you select the perfect fabrics, leathers, or other materials that match your style and durability needs.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h4>Quotation</h4>
+                    <p>We provide a detailed quote outlining the scope of work, materials, timeline, and cost for your project.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <h4>Craftsmanship</h4>
+                    <p>Our skilled upholsterers carefully strip, repair, and rebuild your furniture with meticulous attention to detail.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">6</div>
+                    <h4>Quality Check</h4>
+                    <p>Every piece undergoes a thorough quality inspection to ensure it meets our high standards.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">7</div>
+                    <h4>Delivery</h4>
+                    <p>We carefully deliver your beautifully upholstered furniture back to your home or business.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">8</div>
+                    <h4>Aftercare</h4>
+                    <p>We provide care instructions and ongoing support to help maintain your upholstery for years to come.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="section-padding">
+        <div class="container text-center">
+            <h2>Ready to Transform Your Furniture?</h2>
+            <p>Contact us today to discuss your upholstery project and get a personalized quote.</p>
+            <a href="contact.html" class="btn">Contact Us</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">Vaughans <span>Upholstery</span></div>
+                    <p>Quality upholstery services with attention to detail and craftsmanship. Bringing new life to your furniture since 2010.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="examples.html">Examples</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="services.html">Residential Upholstery</a></li>
+                        <li><a href="services.html">Commercial Upholstery</a></li>
+                        <li><a href="services.html">Custom Upholstery</a></li>
+                        <li><a href="services.html">Furniture Restoration</a></li>
+                        <li><a href="services.html">Fabric Selection</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Vaughans Upholstery. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+</body>
+</html>

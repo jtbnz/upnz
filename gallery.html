@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | Vaughans Upholstery</title>
+    <meta name="description" content="View our portfolio of upholstery projects showcasing our craftsmanship and attention to detail.">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <style>
+        /* Page-specific styles */
+        .gallery-container {
+            padding: var(--spacing-lg) 0;
+        }
+        
+        .gallery-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: var(--spacing-lg);
+            gap: var(--spacing-xs);
+        }
+        
+        .filter-btn {
+            background-color: var(--white);
+            color: var(--primary-color);
+            border: 1px solid var(--gray-medium);
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            border-color: var(--secondary-color);
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--spacing-md);
+        }
+        
+        .gallery-item {
+            height: 300px;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .gallery-item img {
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .gallery-overlay {
+            padding: var(--spacing-md);
+        }
+        
+        .gallery-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .gallery-category {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .project-details {
+            margin-top: var(--spacing-xl);
+        }
+        
+        .project-details h3 {
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-md);
+        }
+        
+        .project-card {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .project-image {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .project-content {
+            padding: var(--spacing-md);
+        }
+        
+        .project-title {
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .project-description {
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .gallery-item {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">Vaughans <span>Upholstery</span></a>
+                
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
+                    <li class="nav-item"><a href="gallery.html" class="nav-link active">Gallery</a></li>
+                    <li class="nav-item"><a href="examples.html" class="nav-link">Examples</a></li>
+                    <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+                
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Banner -->
+    <section class="hero" style="height: 50vh; margin-top: 70px; background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/hero-images/hero-2.jpg');">
+        <div class="hero-content">
+            <h1 class="hero-title">Our Gallery</h1>
+            <p class="hero-subtitle">Showcasing our craftsmanship and attention to detail</p>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-container">
+        <div class="container">
+            <h2 class="section-title">Our Work</h2>
+            
+            <p class="text-center">Browse our portfolio of upholstery projects to see examples of our craftsmanship and attention to detail. From residential to commercial projects, each piece reflects our commitment to quality.</p>
+            
+            <div class="gallery-filters">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="residential">Residential</button>
+                <button class="filter-btn" data-filter="commercial">Commercial</button>
+                <button class="filter-btn" data-filter="custom">Custom</button>
+                <button class="filter-btn" data-filter="antique">Antique Restoration</button>
+            </div>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item" data-category="residential">
+                    <img src="images/gallery/gallery-1.jpg" alt="Vintage chair restoration" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h4 class="gallery-title">Vintage Chair Restoration</h4>
+                        <p class="gallery-category">Residential</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="residential">
+                    <img src="images/gallery/gallery-2.jpg" alt="Modern sofa reupholstery" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h4 class="gallery-title">Modern Sofa Reupholstery</h4>
+                        <p class="gallery-category">Residential</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="residential">
+                    <img src="images/gallery/gallery-3.jpg" alt="Dining set transformation" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h4 class="gallery-title">Dining Set Transformation</h4>
+                        <p class="gallery-category">Residential</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="custom">
+                    <img src="images/gallery/gallery-4.jpg" alt="Custom headboard design" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h4 class="gallery-title">Custom Headboard Design</h4>
+                        <p class="gallery-category">Custom</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="commercial">
+                    <img src="images/gallery/gallery-5.jpg" alt="Commercial booth seating" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h4 class="gallery-title">Commercial Booth Seating</h4>
+                        <p class="gallery-category">Commercial</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="antique">
+                    <img src="images/gallery/gallery-6.jpg" alt="Antique furniture restoration" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h4 class="gallery-title">Antique Furniture Restoration</h4>
+                        <p class="gallery-category">Antique Restoration</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="residential">
+                    <img src="images/services/service-1.jpg" alt="Living room set reupholstery" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h4 class="gallery-title">Living Room Set Reupholstery</h4>
+                        <p class="gallery-category">Residential</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="commercial">
+                    <img src="images/services/service-2.jpg" alt="Restaurant seating project" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h4 class="gallery-title">Restaurant Seating Project</h4>
+                        <p class="gallery-category">Commercial</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="custom">
+                    <img src="images/services/service-3.jpg" alt="Custom ottoman design" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h4 class="gallery-title">Custom Ottoman Design</h4>
+                        <p class="gallery-category">Custom</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Projects -->
+    <section class="section-padding" style="background-color: var(--gray-light);">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            
+            <div class="project-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="images/gallery/gallery-1.jpg" alt="Vintage chair restoration">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Vintage Chair Restoration</h3>
+                        <p class="project-description">This 1950s armchair was completely restored with new padding, springs, and a beautiful wool blend fabric in a contemporary color to blend vintage charm with modern aesthetics.</p>
+                        <p><strong>Services:</strong> Frame repair, spring replacement, new padding, reupholstery</p>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="images/gallery/gallery-5.jpg" alt="Commercial booth seating">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Restaurant Booth Seating</h3>
+                        <p class="project-description">We created custom booth seating for a local restaurant using commercial-grade vinyl upholstery that offers both style and durability in a high-traffic environment.</p>
+                        <p><strong>Services:</strong> Custom design, commercial upholstery, booth construction</p>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="images/gallery/gallery-6.jpg" alt="Antique furniture restoration">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Antique Chaise Lounge</h3>
+                        <p class="project-description">This 19th century chaise lounge required extensive restoration, including frame repair, traditional hand-tied springs, and period-appropriate fabric selection.</p>
+                        <p><strong>Services:</strong> Antique restoration, traditional techniques, custom fabric</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial -->
+    <section class="section-padding">
+        <div class="container text-center">
+            <h2 class="section-title">Client Feedback</h2>
+            
+            <div class="testimonial-card" style="max-width: 800px; margin: 0 auto;">
+                <p class="testimonial-text">"I inherited my grandmother's armchair that had seen better days. Vaughans Upholstery not only restored it beautifully but maintained all the character and charm that made it special. Their attention to detail and craftsmanship is truly exceptional."</p>
+                <p class="testimonial-author">- Rebecca Williams</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="section-padding" style="background-color: var(--primary-color); color: var(--white);">
+        <div class="container text-center">
+            <h2 style="color: var(--white);">Have a Project in Mind?</h2>
+            <p>Contact us today to discuss how we can transform your furniture with our expert upholstery services.</p>
+            <a href="contact.html" class="btn btn-secondary">Get in Touch</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">Vaughans <span>Upholstery</span></div>
+                    <p>Quality upholstery services with attention to detail and craftsmanship. Bringing new life to your furniture since 2010.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="examples.html">Examples</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="services.html">Residential Upholstery</a></li>
+                        <li><a href="services.html">Commercial Upholstery</a></li>
+                        <li><a href="services.html">Custom Upholstery</a></li>
+                        <li><a href="services.html">Furniture Restoration</a></li>
+                        <li><a href="services.html">Fabric Selection</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Vaughans Upholstery. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+    <script>
+        // Gallery filtering functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Get filter value
+                    const filterValue = this.getAttribute('data-filter');
+                    
+                    // Filter gallery items
+                    galleryItems.forEach(item => {
+                        if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
