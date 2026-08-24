@@ -1,17 +1,24 @@
 <?php
 require_once 'auth.php';
+require_once 'config/db.php';
 
-// Get all images from examples directory
+// Get all images from examples directory with proper ordering
 function getExampleImages() {
-    $images = [];
     $imageDir = 'images/examples/';
+    $db = Database::getInstance();
     
-    if (is_dir($imageDir)) {
-        $files = scandir($imageDir);
-        foreach ($files as $file) {
-            if (in_array(strtolower(pathinfo($file, PATHINFO_EXTENSION)), ['jpg', 'jpeg', 'png', 'gif', 'webp'])) {
-                $images[] = $imageDir . $file;
-            }
+    // Sync database with actual files
+    $db->syncWithDirectory($imageDir);
+    
+    // Get ordered images from database
+    $orderedImages = $db->getOrderedImages();
+    
+    // Build full paths
+    $images = [];
+    foreach ($orderedImages as $imageData) {
+        $fullPath = $imageDir . $imageData['filename'];
+        if (file_exists($fullPath)) {
+            $images[] = $fullPath;
         }
     }
     
@@ -25,7 +32,7 @@ $images = getExampleImages();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Examples | Vaughans Upholstery</title>
+    <title>Examples | V D Wood Upholstery</title>
     <meta name="description" content="Browse our extensive gallery of upholstery examples and completed projects.">
     
     <!-- Favicon -->
@@ -49,7 +56,10 @@ $images = getExampleImages();
     <header class="header">
         <div class="container">
             <nav class="navbar">
-                <a href="index.html" class="logo">Vaughans <span>Upholstery</span></a>
+                <a href="index.html" class="logo" style="display: flex; align-items: center;">
+                    <img src="images/V-D-WOOD_black_high-res.png" alt="V D Wood Upholstery Logo" style="height: 40px; margin-right: 10px;">
+                    V D Wood&nbsp;<span>Upholstery</span>
+                </a>
                 
                 <ul class="nav-menu">
                     <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
@@ -57,6 +67,11 @@ $images = getExampleImages();
                     <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
                     <li class="nav-item"><a href="gallery.html" class="nav-link">Gallery</a></li>
                     <li class="nav-item"><a href="examples.php" class="nav-link active">Examples</a></li>
+                    <li class="nav-item social-icons">
+                        <a href="https://www.facebook.com/vdwoodupholstery/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/vdwoodupholstery/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/6421588380" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </li>
                     <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
                 </ul>
                 
@@ -88,15 +103,25 @@ $images = getExampleImages();
                             <?php endif; ?>
                         </div>
                     <?php else: ?>
-                        <div class="login-section">
-                            <button id="loginBtn" class="btn">Login</button>
-                        </div>
+                        <!-- The login button is now a subtle link in the footer -->
                     <?php endif; ?>
                 </div>
             </section>
 
             <!-- Gallery Section -->
             <section class="examples-gallery">
+                <?php if (isAdmin()): ?>
+                    <!-- Admin Controls -->
+                    <div class="admin-controls">
+                        <button id="reorderToggle" class="btn btn-secondary">
+                            <i class="fas fa-arrows-alt"></i> Enable Reordering
+                        </button>
+                        <span class="reorder-hint" style="display: none;">
+                            <i class="fas fa-info-circle"></i> Drag images to reorder. Changes save automatically.
+                        </span>
+                    </div>
+                <?php endif; ?>
+                
                 <?php if (empty($images)): ?>
                     <div class="no-images">
                         <i class="fas fa-images"></i>
@@ -107,10 +132,16 @@ $images = getExampleImages();
                         <?php endif; ?>
                     </div>
                 <?php else: ?>
-                    <div class="gallery-grid">
-                        <?php foreach ($images as $image): ?>
-                            <div class="gallery-item">
-                                <img src="<?php echo htmlspecialchars($image); ?>" alt="Upholstery example" class="gallery-image" onclick="openLightbox('<?php echo htmlspecialchars($image); ?>')">
+                    <div class="gallery-grid" id="galleryGrid">
+                        <?php foreach ($images as $index => $image): ?>
+                            <?php $filename = basename($image); ?>
+                            <div class="gallery-item" data-filename="<?php echo htmlspecialchars($filename); ?>" data-index="<?php echo $index; ?>" onclick="openLightbox(<?php echo $index; ?>)">
+                                <?php if (isAdmin()): ?>
+                                    <div class="drag-handle" style="display: none;">
+                                        <i class="fas fa-grip-vertical"></i>
+                                    </div>
+                                <?php endif; ?>
+                                <img src="<?php echo htmlspecialchars($image); ?>" alt="Upholstery example" class="gallery-image">
                                 <div class="gallery-overlay">
                                     <i class="fas fa-search-plus"></i>
                                 </div>
@@ -160,7 +191,7 @@ $images = getExampleImages();
         <div class="container">
             <div class="footer-content">
                 <div class="footer-about">
-                    <div class="footer-logo">Vaughans <span>Upholstery</span></div>
+                    <div class="footer-logo">V D Wood <span>Upholstery</span></div>
                     <p>Quality upholstery services with attention to detail and craftsmanship. Bringing new life to your furniture since 2010.</p>
                 </div>
                 
@@ -189,7 +220,13 @@ $images = getExampleImages();
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2025 Vaughans Upholstery. All Rights Reserved.</p>
+                <img src="images/V-D-WOOD_black_high-res.png" alt="V D Wood Upholstery Logo" style="height: 50px; margin: 1rem auto;">
+                <p>&copy; 2025 V D Wood Upholstery. All Rights Reserved.</p>
+                <?php if (!isLoggedIn()): ?>
+                <div class="admin-link" style="margin-top: 10px;">
+                    <a href="#" id="loginBtn" style="color: #666; font-size: 0.8rem; text-decoration: none; opacity: 0.7;">Admin</a>
+                </div>
+                <?php endif; ?>
             </div>
         </div>
     </footer>

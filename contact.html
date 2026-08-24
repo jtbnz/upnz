@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact | Vaughans Upholstery</title>
-    <meta name="description" content="Get in touch with Vaughans Upholstery for expert upholstery services. Contact us for quotes, inquiries, or to discuss your project.">
+    <title>Contact | V D Wood Upholstery</title>
+    <meta name="description" content="Contact V D Wood Upholstery for expert furniture, leather, car, and boat upholstery services. Request a quote or discuss your project with us today.">
     
     <!-- Favicon -->
     <link rel="icon" href="images/logo.svg" type="image/svg+xml">
@@ -143,14 +143,22 @@
     <header class="header">
         <div class="container">
             <nav class="navbar">
-                <a href="index.html" class="logo">Vaughans <span>Upholstery</span></a>
+                <a href="index.html" class="logo" style="display: flex; align-items: center;">
+                    <img src="images/V-D-WOOD_black_high-res.png" alt="V D Wood Upholstery Logo" style="height: 40px; margin-right: 10px;">
+                    V D Wood&nbsp;<span>Upholstery</span>
+                </a>
                 
                 <ul class="nav-menu">
                     <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
                     <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
                     <li class="nav-item"><a href="gallery.html" class="nav-link">Gallery</a></li>
-                    <li class="nav-item"><a href="examples.html" class="nav-link">Examples</a></li>
+                    <li class="nav-item"><a href="examples.php" class="nav-link">Examples</a></li>
+                    <li class="nav-item social-icons">
+                        <a href="https://www.facebook.com/vdwoodupholstery/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/vdwoodupholstery/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/6421588380" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </li>
                     <li class="nav-item"><a href="contact.html" class="nav-link active">Contact</a></li>
                 </ul>
                 
@@ -189,7 +197,7 @@
                             </div>
                             <div class="contact-text">
                                 <strong>Address:</strong><br>
-                                89b Manukau Road,<br>
+                                2b Harris St,<br>
                                 Pukekohe, Auckland,<br> New Zealand
                             </div>
                         </div>
@@ -231,7 +239,8 @@
                 <div class="contact-form-container">
                     <h3>Send Us a Message</h3>
                     
-                    <form class="contact-form">
+                    <form class="contact-form" action="contact-process.php" method="POST">
+                        <div id="form-messages"></div>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="name">Name</label>
@@ -260,10 +269,11 @@
                             <label for="service">Service Interested In</label>
                             <select id="service" name="service">
                                 <option value="">Select a service</option>
-                                <option value="residential">Residential Upholstery</option>
-                                <option value="commercial">Commercial Upholstery</option>
+                                <option value="furniture">Furniture Upholstery</option>
+                                <option value="leather">Leather Repairs</option>
+                                <option value="automotive">Car Interiors</option>
+                                <option value="marine">Boat Interiors</option>
                                 <option value="custom">Custom Upholstery</option>
-                                <option value="antique">Antique Restoration</option>
                                 <option value="other">Other</option>
                             </select>
                         </div>
@@ -272,7 +282,13 @@
                             <label for="message">Message</label>
                             <textarea id="message" name="message" rows="5" required></textarea>
                         </div>
+
+                        <div class="form-group" style="display:none;">
+                            <label for="website">Website</label>
+                            <input type="text" id="website" name="website">
+                        </div>
                         
+                        <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
                         <button type="submit" class="btn">Send Message</button>
                     </form>
                 </div>
@@ -334,7 +350,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-about">
-                    <div class="footer-logo">Vaughans <span>Upholstery</span></div>
+                    <div class="footer-logo">V D Wood <span>Upholstery</span></div>
                     <p>Quality upholstery services with attention to detail and craftsmanship. Bringing new life to your furniture since 2010.</p>
                 </div>
                 
@@ -345,7 +361,7 @@
                         <li><a href="about.html">About</a></li>
                         <li><a href="services.html">Services</a></li>
                         <li><a href="gallery.html">Gallery</a></li>
-                        <li><a href="examples.html">Examples</a></li>
+                        <li><a href="examples.php">Examples</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
@@ -353,22 +369,24 @@
                 <div class="footer-links">
                     <h4>Services</h4>
                     <ul>
-                        <li><a href="services.html">Residential Upholstery</a></li>
-                        <li><a href="services.html">Commercial Upholstery</a></li>
-                        <li><a href="services.html">Custom Upholstery</a></li>
-                        <li><a href="services.html">Furniture Restoration</a></li>
-                        <li><a href="services.html">Fabric Selection</a></li>
+                        <li><a href="services.html#residential">Furniture Upholstery</a></li>
+                        <li><a href="services.html#leather">Leather Repairs</a></li>
+                        <li><a href="services.html#automotive">Car Interiors</a></li>
+                        <li><a href="services.html#marine">Boat Interiors</a></li>
+                        <li><a href="services.html#custom">Custom Upholstery</a></li>
                     </ul>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2025 Vaughans Upholstery. All Rights Reserved.</p>
+                <img src="images/logo_white.png" alt="V D Wood Upholstery Logo" style="height: 200px; margin: 1rem auto;">
+                <p>&copy; 2025 V D Wood Upholstery. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
 
     <!-- JavaScript -->
     <script src="js/main.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=6Lce22UrAAAAANWU-p2-8hOOxF8Ho0kQpu85NB1j"></script>
 </body>
 </html>

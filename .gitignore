@@ -1,8 +1,21 @@
 # Security - Never commit secrets
 config/secrets.php
 
+# Separate application, tracked in its own repo:
+# https://github.com/jtbnz/work_track
+work_track/
+
+# Runtime state - image display order, rebuilt by Database::syncWithDirectory()
+data/
+
+# Admin-managed client photos (hundreds of MB, uploaded via admin.php)
+images/examples/*
+!images/examples/.gitkeep
+!images/examples/.htaccess
+
 # System files
 .DS_Store
+._*
 Thumbs.db
 
 # Editor files
@@ -26,12 +39,3 @@ Thumbs.db
 # Cache files
 cache/
 *.cache
-
-# Upload directories (optional - you may want to track some example images)
-# images/examples/*
-# !images/examples/.gitkeep
-
-images/gallery/*
-images/services/*
-images/hero-images/*
-images/examples/*

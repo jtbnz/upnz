@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gallery | Vaughans Upholstery</title>
-    <meta name="description" content="View our portfolio of upholstery projects showcasing our craftsmanship and attention to detail.">
+    <title>Gallery | V D Wood Upholstery</title>
+    <meta name="description" content="View our gallery of furniture, leather, car, and boat upholstery projects. See our quality craftsmanship and attention to detail.">
     
     <!-- Favicon -->
     <link rel="icon" href="images/logo.svg" type="image/svg+xml">
@@ -142,14 +142,22 @@
     <header class="header">
         <div class="container">
             <nav class="navbar">
-                <a href="index.html" class="logo">Vaughans <span>Upholstery</span></a>
+                <a href="index.html" class="logo" style="display: flex; align-items: center;">
+                    <img src="images/V-D-WOOD_black_high-res.png" alt="V D Wood Upholstery Logo" style="height: 40px; margin-right: 10px;">
+                    V D Wood&nbsp;<span>Upholstery</span>
+                </a>
                 
                 <ul class="nav-menu">
                     <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
                     <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
                     <li class="nav-item"><a href="gallery.html" class="nav-link active">Gallery</a></li>
-                    <li class="nav-item"><a href="examples.html" class="nav-link">Examples</a></li>
+                    <li class="nav-item"><a href="examples.php" class="nav-link">Examples</a></li>
+                    <li class="nav-item social-icons">
+                        <a href="https://www.facebook.com/vdwoodupholstery/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/vdwoodupholstery/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/6421588380" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </li>
                     <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
                 </ul>
                 
@@ -179,81 +187,58 @@
             
             <div class="gallery-filters">
                 <button class="filter-btn active" data-filter="all">All Projects</button>
-                <button class="filter-btn" data-filter="residential">Residential</button>
-                <button class="filter-btn" data-filter="commercial">Commercial</button>
+                <button class="filter-btn" data-filter="furniture">Furniture</button>
+                <button class="filter-btn" data-filter="leather">Leather</button>
+                <button class="filter-btn" data-filter="automotive">Automotive</button>
+                <button class="filter-btn" data-filter="marine">Marine</button>
                 <button class="filter-btn" data-filter="custom">Custom</button>
-                <button class="filter-btn" data-filter="antique">Antique Restoration</button>
             </div>
             
             <div class="gallery-grid">
-                <div class="gallery-item" data-category="residential">
+                <div class="gallery-item" data-category="furniture">
                     <img src="images/gallery/gallery-1.jpg" alt="Vintage chair restoration" class="gallery-image">
                     <div class="gallery-overlay">
                         <h4 class="gallery-title">Vintage Chair Restoration</h4>
-                        <p class="gallery-category">Residential</p>
+                        <p class="gallery-category">Furniture</p>
                     </div>
                 </div>
                 
-                <div class="gallery-item" data-category="residential">
+                <div class="gallery-item" data-category="furniture">
                     <img src="images/gallery/gallery-2.jpg" alt="Modern sofa reupholstery" class="gallery-image">
                     <div class="gallery-overlay">
                         <h4 class="gallery-title">Modern Sofa Reupholstery</h4>
-                        <p class="gallery-category">Residential</p>
+                        <p class="gallery-category">Furniture</p>
                     </div>
                 </div>
                 
-                <div class="gallery-item" data-category="residential">
-                    <img src="images/gallery/gallery-3.jpg" alt="Dining set transformation" class="gallery-image">
+                <div class="gallery-item" data-category="leather">
+                    <img src="images/gallery/gallery-3.jpg" alt="Leather sofa repair" class="gallery-image">
                     <div class="gallery-overlay">
-                        <h4 class="gallery-title">Dining Set Transformation</h4>
-                        <p class="gallery-category">Residential</p>
+                        <h4 class="gallery-title">Leather Sofa Repair</h4>
+                        <p class="gallery-category">Leather</p>
                     </div>
                 </div>
                 
-                <div class="gallery-item" data-category="custom">
-                    <img src="images/gallery/gallery-4.jpg" alt="Custom headboard design" class="gallery-image">
+                <div class="gallery-item" data-category="automotive">
+                    <img src="images/gallery/gallery-4.jpg" alt="Classic car interior" class="gallery-image">
                     <div class="gallery-overlay">
-                        <h4 class="gallery-title">Custom Headboard Design</h4>
-                        <p class="gallery-category">Custom</p>
+                        <h4 class="gallery-title">Classic Car Interior</h4>
+                        <p class="gallery-category">Automotive</p>
                     </div>
                 </div>
                 
-                <div class="gallery-item" data-category="commercial">
-                    <img src="images/gallery/gallery-5.jpg" alt="Commercial booth seating" class="gallery-image">
+                <div class="gallery-item" data-category="marine">
+                    <img src="images/gallery/gallery-5.jpg" alt="Boat seat upholstery" class="gallery-image">
                     <div class="gallery-overlay">
-                        <h4 class="gallery-title">Commercial Booth Seating</h4>
-                        <p class="gallery-category">Commercial</p>
-                    </div>
-                </div>
-                
-                <div class="gallery-item" data-category="antique">
-                    <img src="images/gallery/gallery-6.jpg" alt="Antique furniture restoration" class="gallery-image">
-                    <div class="gallery-overlay">
-                        <h4 class="gallery-title">Antique Furniture Restoration</h4>
-                        <p class="gallery-category">Antique Restoration</p>
-                    </div>
-                </div>
-                
-                <div class="gallery-item" data-category="residential">
-                    <img src="images/services/service-1.jpg" alt="Living room set reupholstery" class="gallery-image">
-                    <div class="gallery-overlay">
-                        <h4 class="gallery-title">Living Room Set Reupholstery</h4>
-                        <p class="gallery-category">Residential</p>
-                    </div>
-                </div>
-                
-                <div class="gallery-item" data-category="commercial">
-                    <img src="images/services/service-2.jpg" alt="Restaurant seating project" class="gallery-image">
-                    <div class="gallery-overlay">
-                        <h4 class="gallery-title">Restaurant Seating Project</h4>
-                        <p class="gallery-category">Commercial</p>
+                        <h4 class="gallery-title">Boat Seat Upholstery</h4>
+                        <p class="gallery-category">Marine</p>
                     </div>
                 </div>
                 
                 <div class="gallery-item" data-category="custom">
-                    <img src="images/services/service-3.jpg" alt="Custom ottoman design" class="gallery-image">
+                    <img src="images/gallery/gallery-6.jpg" alt="Custom booth seating" class="gallery-image">
                     <div class="gallery-overlay">
-                        <h4 class="gallery-title">Custom Ottoman Design</h4>
+                        <h4 class="gallery-title">Custom Booth Seating</h4>
                         <p class="gallery-category">Custom</p>
                     </div>
                 </div>
@@ -309,7 +294,7 @@
             <h2 class="section-title">Client Feedback</h2>
             
             <div class="testimonial-card" style="max-width: 800px; margin: 0 auto;">
-                <p class="testimonial-text">"I inherited my grandmother's armchair that had seen better days. Vaughans Upholstery not only restored it beautifully but maintained all the character and charm that made it special. Their attention to detail and craftsmanship is truly exceptional."</p>
+                <p class="testimonial-text">"I inherited my grandmother's armchair that had seen better days. V D Wood Upholstery not only restored it beautifully but maintained all the character and charm that made it special. Their attention to detail and craftsmanship is truly exceptional."</p>
                 <p class="testimonial-author">- Rebecca Williams</p>
             </div>
         </div>
@@ -329,7 +314,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-about">
-                    <div class="footer-logo">Vaughans <span>Upholstery</span></div>
+                    <div class="footer-logo">V D Wood <span>Upholstery</span></div>
                     <p>Quality upholstery services with attention to detail and craftsmanship. Bringing new life to your furniture since 2010.</p>
                 </div>
                 
@@ -340,7 +325,7 @@
                         <li><a href="about.html">About</a></li>
                         <li><a href="services.html">Services</a></li>
                         <li><a href="gallery.html">Gallery</a></li>
-                        <li><a href="examples.html">Examples</a></li>
+                        <li><a href="examples.php">Examples</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
@@ -348,17 +333,18 @@
                 <div class="footer-links">
                     <h4>Services</h4>
                     <ul>
-                        <li><a href="services.html">Residential Upholstery</a></li>
-                        <li><a href="services.html">Commercial Upholstery</a></li>
-                        <li><a href="services.html">Custom Upholstery</a></li>
-                        <li><a href="services.html">Furniture Restoration</a></li>
-                        <li><a href="services.html">Fabric Selection</a></li>
+                        <li><a href="services.html#residential">Furniture Upholstery</a></li>
+                        <li><a href="services.html#leather">Leather Repairs</a></li>
+                        <li><a href="services.html#automotive">Car Interiors</a></li>
+                        <li><a href="services.html#marine">Boat Interiors</a></li>
+                        <li><a href="services.html#custom">Custom Upholstery</a></li>
                     </ul>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2025 Vaughans Upholstery. All Rights Reserved.</p>
+                <img src="images/logo_white.png" alt="V D Wood Upholstery Logo" style="height: 200px; margin: 1rem auto;">
+                <p>&copy; 2025 V D Wood Upholstery. All Rights Reserved.</p>
             </div>
         </div>
     </footer>

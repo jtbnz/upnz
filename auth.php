@@ -35,7 +35,7 @@ function logoutUser() {
 }
 
 // Handle login form submission
-if ($_POST['action'] === 'login' && isset($_POST['username']) && isset($_POST['password'])) {
+if (isset($_POST['action']) && $_POST['action'] === 'login' && isset($_POST['username']) && isset($_POST['password'])) {
     $username = trim($_POST['username']);
     $password = trim($_POST['password']);
     
@@ -48,7 +48,7 @@ if ($_POST['action'] === 'login' && isset($_POST['username']) && isset($_POST['p
 }
 
 // Handle logout
-if ($_GET['action'] === 'logout') {
+if (isset($_GET['action']) && $_GET['action'] === 'logout') {
     logoutUser();
     header('Location: examples.php');
     exit;

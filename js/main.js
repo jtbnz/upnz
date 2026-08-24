@@ -71,6 +71,28 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize nav highlighting on page load
     highlightNavOnScroll();
     
+// Login Modal Functionality
+    const loginBtn = document.getElementById('loginBtn');
+    const loginModal = document.getElementById('loginModal');
+    const closeBtn = document.querySelector('.modal .close');
+
+    if (loginBtn && loginModal) {
+        loginBtn.addEventListener('click', () => {
+            loginModal.style.display = 'block';
+        });
+    }
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            loginModal.style.display = 'none';
+        });
+    }
+
+    window.addEventListener('click', (event) => {
+        if (event.target == loginModal) {
+            loginModal.style.display = 'none';
+        }
+    });
     // Simple form validation for contact form
     const contactForm = document.querySelector('.contact-form');
     
@@ -78,60 +100,35 @@ document.addEventListener('DOMContentLoaded', function() {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            let isValid = true;
-            const nameInput = contactForm.querySelector('input[name="name"]');
-            const emailInput = contactForm.querySelector('input[name="email"]');
-            const messageInput = contactForm.querySelector('textarea[name="message"]');
+            const formMessages = document.getElementById('form-messages');
             
-            // Reset previous error states
-            const formInputs = contactForm.querySelectorAll('input, textarea');
-            formInputs.forEach(input => {
-                input.style.borderColor = '';
+            grecaptcha.ready(function() {
+                grecaptcha.execute('6Lce22UrAAAAANWU-p2-8hOOxF8Ho0kQpu85NB1j', {action: 'submit'}).then(function(token) {
+                    document.getElementById('recaptchaResponse').value = token;
+                    
+                    const formData = new FormData(contactForm);
+                    
+                    fetch('contact-process.php', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        formMessages.textContent = data.message;
+                        if (data.success) {
+                            formMessages.className = 'success-message';
+                            contactForm.reset();
+                        } else {
+                            formMessages.className = 'error-message';
+                        }
+                    })
+                    .catch(error => {
+                        formMessages.className = 'error-message';
+                        formMessages.textContent = 'An unexpected error occurred. Please try again.';
+                        console.error('Error:', error);
+                    });
+                });
             });
-            
-            // Validate name
-            if (nameInput && !nameInput.value.trim()) {
-                nameInput.style.borderColor = 'red';
-                isValid = false;
-            }
-            
-            // Validate email
-            if (emailInput) {
-                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailPattern.test(emailInput.value)) {
-                    emailInput.style.borderColor = 'red';
-                    isValid = false;
-                }
-            }
-            
-            // Validate message
-            if (messageInput && !messageInput.value.trim()) {
-                messageInput.style.borderColor = 'red';
-                isValid = false;
-            }
-            
-            // If form is valid, show success message (in a real site, this would submit the form)
-            if (isValid) {
-                const successMessage = document.createElement('div');
-                successMessage.className = 'success-message';
-                successMessage.textContent = 'Thank you for your message! We will get back to you soon.';
-                successMessage.style.color = 'green';
-                successMessage.style.marginTop = '1rem';
-                
-                // Remove any existing success message
-                const existingMessage = contactForm.querySelector('.success-message');
-                if (existingMessage) {
-                    existingMessage.remove();
-                }
-                
-                contactForm.appendChild(successMessage);
-                contactForm.reset();
-                
-                // Remove success message after 5 seconds
-                setTimeout(() => {
-                    successMessage.remove();
-                }, 5000);
-            }
         });
     }
 });

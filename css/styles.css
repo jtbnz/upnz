@@ -580,6 +580,18 @@ ul {
   }
 }
 
+@media (max-width: 768px) {
+   .logo span {
+       display: none;
+   }
+   .logo {
+       font-size: 0; /* Hide the text part of the logo */
+   }
+   .logo img {
+       height: 46px !important; /* 40px * 1.15 */
+   }
+}
+
 @media (max-width: 576px) {
   html {
     font-size: 14px;

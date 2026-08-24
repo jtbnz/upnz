@@ -21,7 +21,6 @@ A modern, responsive website for Vaughans Upholstery featuring a comprehensive g
 
 ### Login Credentials
 - **Username**: `admin`
-- **Password**: `K7m9P2x8Q5w3N6z1`
 
 ### Admin Functionality
 1. **Access Examples Page**: Navigate to `/examples.php`

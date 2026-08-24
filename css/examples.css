@@ -336,3 +336,114 @@
         height: 200px;
     }
 }
+
+/* Admin Controls for Reordering */
+.admin-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-md);
+    background-color: var(--light-color);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--gray-medium);
+}
+
+.reorder-hint {
+    color: var(--gray-dark);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.reorder-hint i {
+    color: var(--primary-color);
+}
+
+/* Drag and Drop Styles */
+.gallery-grid.reorder-mode {
+    background-color: #f8f9fa;
+    border: 2px dashed var(--gray-medium);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+}
+
+.gallery-item.draggable {
+    cursor: move;
+    position: relative;
+    transition: all var(--transition-fast);
+}
+
+.gallery-item.draggable:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.gallery-item.dragging {
+    opacity: 0.5;
+    transform: rotate(5deg) scale(0.95);
+    z-index: 1000;
+}
+
+.gallery-item.drag-over {
+    border: 3px solid var(--primary-color);
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(58, 74, 92, 0.3);
+}
+
+.drag-handle {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: rgba(58, 74, 92, 0.9);
+    color: white;
+    border-radius: 4px;
+    padding: 4px 6px;
+    font-size: 0.8rem;
+    z-index: 10;
+    cursor: move;
+    transition: all var(--transition-fast);
+}
+
+.drag-handle:hover {
+    background: var(--primary-color);
+    transform: scale(1.1);
+}
+
+.gallery-item.draggable .gallery-overlay {
+    display: none; /* Hide zoom overlay during reorder mode */
+}
+
+/* Button Styles */
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: 1px solid var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--dark-color);
+    border-color: var(--dark-color);
+}
+
+/* Responsive Design for Admin Controls */
+@media (max-width: 768px) {
+    .admin-controls {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+    }
+    
+    .reorder-hint {
+        justify-content: center;
+        margin-top: var(--spacing-sm);
+    }
+    
+    .drag-handle {
+        top: 4px;
+        left: 4px;
+        padding: 2px 4px;
+        font-size: 0.7rem;
+    }
+}

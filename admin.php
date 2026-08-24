@@ -1,5 +1,6 @@
 <?php
 require_once 'auth.php';
+require_once 'config/db.php';
 
 // Check if user is admin
 if (!isAdmin()) {
@@ -9,54 +10,122 @@ if (!isAdmin()) {
 
 $message = '';
 $error = '';
+$uploadResults = [];
 
-// Handle file upload
-if ($_POST['action'] === 'upload' && isset($_FILES['image'])) {
+// Handle multiple file upload
+if (isset($_POST['action']) && $_POST['action'] === 'upload' && isset($_FILES['images'])) {
     $uploadDir = 'images/examples/';
     $allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
     $maxFileSize = 5 * 1024 * 1024; // 5MB
     
-    $file = $_FILES['image'];
+    $files = $_FILES['images'];
+    $uploadCount = 0;
+    $errorCount = 0;
     
-    if ($file['error'] === UPLOAD_ERR_OK) {
-        // Validate file type
-        if (!in_array($file['type'], $allowedTypes)) {
-            $error = 'Invalid file type. Please upload JPG, PNG, GIF, or WebP images only.';
-        }
-        // Validate file size
-        elseif ($file['size'] > $maxFileSize) {
-            $error = 'File too large. Maximum size is 5MB.';
-        }
-        else {
-            // Generate unique filename
-            $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
-            $filename = uniqid('example_') . '.' . $extension;
-            $uploadPath = $uploadDir . $filename;
+    // Create directory if it doesn't exist
+    if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0755, true);
+    }
+    
+    // Handle multiple files
+    for ($i = 0; $i < count($files['name']); $i++) {
+        if ($files['error'][$i] === UPLOAD_ERR_OK) {
+            $fileName = $files['name'][$i];
+            $fileType = $files['type'][$i];
+            $fileSize = $files['size'][$i];
+            $fileTmpName = $files['tmp_name'][$i];
             
-            // Create directory if it doesn't exist
-            if (!is_dir($uploadDir)) {
-                mkdir($uploadDir, 0755, true);
+            // Validate file type
+            if (!in_array($fileType, $allowedTypes)) {
+                $uploadResults[] = ['file' => $fileName, 'status' => 'error', 'message' => 'Invalid file type'];
+                $errorCount++;
+                continue;
             }
+            
+            // Validate file size
+            if ($fileSize > $maxFileSize) {
+                $uploadResults[] = ['file' => $fileName, 'status' => 'error', 'message' => 'File too large (max 5MB)'];
+                $errorCount++;
+                continue;
+            }
+            
+            // Generate unique filename
+            $extension = pathinfo($fileName, PATHINFO_EXTENSION);
+            $uniqueFilename = uniqid('example_') . '_' . time() . '.' . $extension;
+            $uploadPath = $uploadDir . $uniqueFilename;
             
             // Move uploaded file
-            if (move_uploaded_file($file['tmp_name'], $uploadPath)) {
-                $message = 'Image uploaded successfully!';
+            if (move_uploaded_file($fileTmpName, $uploadPath)) {
+                // Add to database
+                $db = Database::getInstance();
+                $db->addImage($uniqueFilename);
+                
+                $uploadResults[] = ['file' => $fileName, 'status' => 'success', 'message' => 'Uploaded successfully'];
+                $uploadCount++;
             } else {
-                $error = 'Failed to upload image. Please try again.';
+                $uploadResults[] = ['file' => $fileName, 'status' => 'error', 'message' => 'Failed to upload'];
+                $errorCount++;
             }
+        } else {
+            $uploadResults[] = ['file' => $files['name'][$i], 'status' => 'error', 'message' => 'Upload error: ' . $files['error'][$i]];
+            $errorCount++;
+        }
+    }
+    
+    if ($uploadCount > 0) {
+        $message = "Successfully uploaded {$uploadCount} image(s).";
+        if ($errorCount > 0) {
+            $message .= " {$errorCount} file(s) failed to upload.";
         }
     } else {
-        $error = 'Upload error: ' . $file['error'];
+        $error = "Failed to upload all files. Check file types and sizes.";
     }
 }
 
-// Handle file deletion
-if ($_POST['action'] === 'delete' && isset($_POST['filename'])) {
+// Handle bulk file deletion
+if (isset($_POST['action']) && $_POST['action'] === 'bulk_delete' && isset($_POST['filenames'])) {
+    $filenames = $_POST['filenames'];
+    $deleteCount = 0;
+    $failCount = 0;
+    $db = Database::getInstance();
+    
+    foreach ($filenames as $filename) {
+        $filename = basename($filename); // Security: prevent directory traversal
+        $filePath = 'images/examples/' . $filename;
+        
+        if (file_exists($filePath)) {
+            if (unlink($filePath)) {
+                // Remove from database
+                $db->removeImage($filename);
+                $deleteCount++;
+            } else {
+                $failCount++;
+            }
+        } else {
+            $failCount++;
+        }
+    }
+    
+    if ($deleteCount > 0) {
+        $message = "Successfully deleted {$deleteCount} image(s).";
+        if ($failCount > 0) {
+            $message .= " {$failCount} file(s) failed to delete.";
+        }
+    } else {
+        $error = "Failed to delete any files.";
+    }
+}
+
+// Handle single file deletion (backward compatibility)
+if (isset($_POST['action']) && $_POST['action'] === 'delete' && isset($_POST['filename'])) {
     $filename = basename($_POST['filename']); // Security: prevent directory traversal
     $filePath = 'images/examples/' . $filename;
     
     if (file_exists($filePath)) {
         if (unlink($filePath)) {
+            // Remove from database
+            $db = Database::getInstance();
+            $db->removeImage($filename);
             $message = 'Image deleted successfully!';
         } else {
             $error = 'Failed to delete image.';
@@ -178,60 +247,99 @@ $images = getExampleImages();
 
             <!-- Upload Section -->
             <section class="upload-section">
-                <h2>Upload New Image</h2>
-                <form method="POST" enctype="multipart/form-data" class="upload-form">
+                <h2>Upload Images</h2>
+                <form method="POST" enctype="multipart/form-data" class="upload-form" id="uploadForm">
                     <input type="hidden" name="action" value="upload">
                     
                     <div class="upload-area" id="uploadArea">
                         <div class="upload-content">
-                            <i class="fas fa-cloud-upload-alt"></i>
-                            <p>Drag and drop an image here, or click to select</p>
-                            <p class="upload-info">Supported formats: JPG, PNG, GIF, WebP (Max 5MB)</p>
+                            <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                            <p class="upload-main-text">Drag and drop images here, or click to select</p>
+                            <p class="upload-info">Supported formats: JPG, PNG, GIF, WebP (Max 5MB each) • Multiple files supported</p>
                         </div>
-                        <input type="file" name="image" id="imageInput" accept="image/*" required>
+                        <input type="file" name="images[]" id="imageInput" accept="image/*" multiple>
                     </div>
                     
-                    <div class="upload-preview" id="uploadPreview" style="display: none;">
-                        <img id="previewImage" src="" alt="Preview">
-                        <div class="preview-info">
-                            <p id="fileName"></p>
-                            <p id="fileSize"></p>
+                    <div class="upload-preview-container" id="uploadPreviewContainer" style="display: none;">
+                        <h3>Selected Files:</h3>
+                        <div class="upload-preview-grid" id="uploadPreviewGrid"></div>
+                        <div class="upload-actions">
+                            <button type="button" class="btn btn-secondary" id="clearFiles">
+                                <i class="fas fa-times"></i> Clear All
+                            </button>
+                            <button type="submit" class="btn upload-btn" id="uploadBtn">
+                                <i class="fas fa-upload"></i> Upload <span id="fileCount">0</span> File(s)
+                            </button>
                         </div>
                     </div>
-                    
-                    <button type="submit" class="btn upload-btn">
-                        <i class="fas fa-upload"></i> Upload Image
-                    </button>
                 </form>
+                
+                <!-- Upload Results -->
+                <?php if (!empty($uploadResults)): ?>
+                    <div class="upload-results">
+                        <h3>Upload Results:</h3>
+                        <?php foreach ($uploadResults as $result): ?>
+                            <div class="upload-result-item <?php echo $result['status']; ?>">
+                                <i class="fas <?php echo $result['status'] === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'; ?>"></i>
+                                <span class="file-name"><?php echo htmlspecialchars($result['file']); ?></span>
+                                <span class="result-message"><?php echo htmlspecialchars($result['message']); ?></span>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
             </section>
 
             <!-- Images Management -->
             <section class="images-section">
-                <h2>Manage Images (<?php echo count($images); ?> total)</h2>
+                <div class="images-header">
+                    <h2>Manage Images (<?php echo count($images); ?> total)</h2>
+                    <div class="images-controls">
+                        <div class="view-controls">
+                            <button class="btn btn-small" id="selectAllBtn" onclick="selectAllImages()">
+                                <i class="fas fa-check-square"></i> Select All
+                            </button>
+                            <button class="btn btn-small" id="deselectAllBtn" onclick="deselectAllImages()" style="display: none;">
+                                <i class="fas fa-square"></i> Deselect All
+                            </button>
+                        </div>
+                        <div class="bulk-actions" id="bulkActions" style="display: none;">
+                            <span class="selected-count" id="selectedCount">0 selected</span>
+                            <button class="btn btn-danger" onclick="confirmBulkDelete()">
+                                <i class="fas fa-trash"></i> Delete Selected
+                            </button>
+                        </div>
+                    </div>
+                </div>
                 
                 <?php if (empty($images)): ?>
                     <div class="no-images">
                         <i class="fas fa-images"></i>
-                        <p>No images uploaded yet. Upload your first image above!</p>
+                        <p>No images uploaded yet. Upload your first images above!</p>
                     </div>
                 <?php else: ?>
-                    <div class="images-grid">
+                    <div class="images-grid" id="imagesGrid">
                         <?php foreach ($images as $image): ?>
-                            <div class="image-card">
+                            <div class="image-card" data-filename="<?php echo htmlspecialchars($image['filename']); ?>">
+                                <div class="image-checkbox">
+                                    <input type="checkbox" class="image-select" value="<?php echo htmlspecialchars($image['filename']); ?>" onchange="updateSelection()">
+                                </div>
+                                
                                 <div class="image-preview">
-                                    <img src="<?php echo htmlspecialchars($image['path']); ?>" alt="Example image">
+                                    <img src="<?php echo htmlspecialchars($image['path']); ?>" alt="Example image" loading="lazy">
                                     <div class="image-overlay">
-                                        <button class="btn-icon view-btn" onclick="viewImage('<?php echo htmlspecialchars($image['path']); ?>')">
+                                        <button class="btn-icon view-btn" onclick="viewImage('<?php echo htmlspecialchars($image['path']); ?>')" title="View full size">
                                             <i class="fas fa-eye"></i>
                                         </button>
-                                        <button class="btn-icon delete-btn" onclick="confirmDelete('<?php echo htmlspecialchars($image['filename']); ?>')">
+                                        <button class="btn-icon delete-btn" onclick="confirmDelete('<?php echo htmlspecialchars($image['filename']); ?>')" title="Delete image">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </div>
                                 </div>
                                 
                                 <div class="image-info">
-                                    <p class="image-name"><?php echo htmlspecialchars($image['filename']); ?></p>
+                                    <p class="image-name" title="<?php echo htmlspecialchars($image['filename']); ?>">
+                                        <?php echo htmlspecialchars(strlen($image['filename']) > 20 ? substr($image['filename'], 0, 17) . '...' : $image['filename']); ?>
+                                    </p>
                                     <p class="image-details">
                                         <?php echo number_format($image['size'] / 1024, 1); ?> KB • 
                                         <?php echo date('M j, Y', $image['modified']); ?>
@@ -249,13 +357,32 @@ $images = getExampleImages();
     <div id="deleteModal" class="modal">
         <div class="modal-content">
             <h3>Confirm Deletion</h3>
-            <p>Are you sure you want to delete this image? This action cannot be undone.</p>
+            <p id="deleteMessage">Are you sure you want to delete this image? This action cannot be undone.</p>
             <div class="modal-actions">
                 <button class="btn btn-secondary" onclick="closeDeleteModal()">Cancel</button>
-                <form method="POST" style="display: inline;">
-                    <input type="hidden" name="action" value="delete">
+                <form method="POST" style="display: inline;" id="deleteForm">
+                    <input type="hidden" name="action" value="delete" id="deleteAction">
                     <input type="hidden" name="filename" id="deleteFilename">
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <button type="submit" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bulk Delete Modal -->
+    <div id="bulkDeleteModal" class="modal">
+        <div class="modal-content">
+            <h3>Confirm Bulk Deletion</h3>
+            <p id="bulkDeleteMessage">Are you sure you want to delete the selected images? This action cannot be undone.</p>
+            <div class="selected-files-preview" id="selectedFilesPreview"></div>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="closeBulkDeleteModal()">Cancel</button>
+                <form method="POST" style="display: inline;" id="bulkDeleteForm">
+                    <input type="hidden" name="action" value="bulk_delete">
+                    <div id="bulkDeleteFilenames"></div>
+                    <button type="submit" class="btn btn-danger" id="confirmBulkDeleteBtn">
+                        <i class="fas fa-trash"></i> Delete <span id="bulkDeleteCount">0</span> Images
+                    </button>
                 </form>
             </div>
         </div>
