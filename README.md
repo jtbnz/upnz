@@ -1,6 +1,6 @@
-# Vaughans Upholstery Website
+# V D Wood Upholstery Website
 
-A modern, responsive website for Vaughans Upholstery featuring a comprehensive gallery system with admin functionality.
+A modern, responsive website for V D Wood Upholstery featuring a comprehensive gallery system with admin functionality.
 
 ## Features
 

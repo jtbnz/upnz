@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 The website for V D Wood Upholstery, live at **https://vdwood.co.nz**. Hand-written HTML/CSS/vanilla-JS pages plus a small PHP layer providing admin login, a SQLite-ordered image gallery, and a contact form backend. No build step, no package manager, no framework — files are edited and served directly.
 
-Despite the repo name (`upnz`) and lingering "Vaughans Upholstery" strings in some markup, the business is V D Wood Upholstery.
+Despite the repo name (`upnz`), the business is V D Wood Upholstery. It was formerly Vaughans Upholstery; that name is gone from the markup, but note that **"Vaughan" singular is the founder's name**, and his bio and photo caption in [about.html](about.html) should not be caught by a rebranding search-and-replace.
 
 ## Deployment
 

@@ -189,7 +189,7 @@ $images = getExampleImages();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel | Vaughans Upholstery</title>
+    <title>Admin Panel | V D Wood Upholstery</title>
     
     <!-- Favicon -->
     <link rel="icon" href="/favicon.ico" sizes="32x32">
@@ -214,7 +214,10 @@ $images = getExampleImages();
     <header class="header">
         <div class="container">
             <nav class="navbar">
-                <a href="index.html" class="logo">Vaughans <span>Upholstery</span></a>
+                <a href="index.html" class="logo" style="display: flex; align-items: center;">
+                    <img src="images/V-D-WOOD_black_high-res.png" alt="V D Wood Upholstery Logo" style="height: 40px; margin-right: 10px;">
+                    V D Wood&nbsp;<span>Upholstery</span>
+                </a>
                 
                 <ul class="nav-menu">
                     <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
@@ -423,13 +426,13 @@ $images = getExampleImages();
         <div class="container">
             <div class="footer-content">
                 <div class="footer-about">
-                    <div class="footer-logo">Vaughans <span>Upholstery</span></div>
+                    <div class="footer-logo">V D Wood <span>Upholstery</span></div>
                     <p>Quality upholstery services with attention to detail and craftsmanship.</p>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2025 Vaughans Upholstery. All Rights Reserved.</p>
+                <p>&copy; 2025 V D Wood Upholstery. All Rights Reserved.</p>
             </div>
         </div>
     </footer>

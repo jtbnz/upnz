@@ -1,5 +1,5 @@
 /**
- * Vaughans Upholstery - Main JavaScript
+ * V D Wood Upholstery - Main JavaScript
  * Minimal JavaScript for enhanced functionality
  */
 
