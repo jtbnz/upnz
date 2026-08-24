@@ -1,3 +1,30 @@
+# ---------------------------------------------------------------------------
+# Site hardening. Kept above the cPanel-managed blocks below, which cPanel
+# rewrites in place - do not move these rules inside those markers.
+# ---------------------------------------------------------------------------
+
+# No directory listings anywhere.
+Options -Indexes
+
+# Deny dotfiles: .git, .env, .user.ini, .DS_Store and friends.
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+
+# Deny AppleDouble sidecar files (._foo) left behind by macOS copies.
+<FilesMatch "^\._">
+    Require all denied
+</FilesMatch>
+
+# Documentation, config templates, databases and backups are not web content.
+<FilesMatch "(?i)\.(md|markdown|db|sqlite3?|example|sample|dist|bak|backup|log|ini|sql|lock|json|yml|yaml)$">
+    Require all denied
+</FilesMatch>
+
+# composer.json/package.json live in work_track and are covered above; allow
+# nothing else through by accident.
+RedirectMatch 404 (?i)^/(config|data)/
+
 
 
 # BEGIN cPanel-generated php ini directives, do not edit

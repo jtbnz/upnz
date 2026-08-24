@@ -15,9 +15,18 @@ $uploadResults = [];
 // Handle multiple file upload
 if (isset($_POST['action']) && $_POST['action'] === 'upload' && isset($_FILES['images'])) {
     $uploadDir = 'images/examples/';
-    $allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
+    // Map the image type the server detects to the extension we will store it
+    // under. The browser-supplied MIME type and filename are never trusted:
+    // both are attacker-controlled and were previously enough to land a .php
+    // file in this web-executable directory.
+    $allowedTypes = [
+        IMAGETYPE_JPEG => 'jpg',
+        IMAGETYPE_PNG  => 'png',
+        IMAGETYPE_GIF  => 'gif',
+        IMAGETYPE_WEBP => 'webp',
+    ];
     $maxFileSize = 5 * 1024 * 1024; // 5MB
-    
+
     $files = $_FILES['images'];
     $uploadCount = 0;
     $errorCount = 0;
@@ -30,32 +39,43 @@ if (isset($_POST['action']) && $_POST['action'] === 'upload' && isset($_FILES['i
     // Handle multiple files
     for ($i = 0; $i < count($files['name']); $i++) {
         if ($files['error'][$i] === UPLOAD_ERR_OK) {
-            $fileName = $files['name'][$i];
-            $fileType = $files['type'][$i];
+            $fileName = basename($files['name'][$i]);
             $fileSize = $files['size'][$i];
             $fileTmpName = $files['tmp_name'][$i];
-            
-            // Validate file type
-            if (!in_array($fileType, $allowedTypes)) {
-                $uploadResults[] = ['file' => $fileName, 'status' => 'error', 'message' => 'Invalid file type'];
+
+            // Reject anything that did not arrive through an actual upload.
+            if (!is_uploaded_file($fileTmpName)) {
+                $uploadResults[] = ['file' => $fileName, 'status' => 'error', 'message' => 'Invalid upload'];
                 $errorCount++;
                 continue;
             }
-            
+
             // Validate file size
             if ($fileSize > $maxFileSize) {
                 $uploadResults[] = ['file' => $fileName, 'status' => 'error', 'message' => 'File too large (max 5MB)'];
                 $errorCount++;
                 continue;
             }
-            
+
+            // Validate the file type by inspecting the file itself, and take
+            // the extension from what was detected rather than from the name
+            // the browser sent.
+            $imageInfo = @getimagesize($fileTmpName);
+            if ($imageInfo === false || !isset($allowedTypes[$imageInfo[2]])) {
+                $uploadResults[] = ['file' => $fileName, 'status' => 'error', 'message' => 'Invalid file type'];
+                $errorCount++;
+                continue;
+            }
+
             // Generate unique filename
-            $extension = pathinfo($fileName, PATHINFO_EXTENSION);
+            $extension = $allowedTypes[$imageInfo[2]];
             $uniqueFilename = uniqid('example_') . '_' . time() . '.' . $extension;
             $uploadPath = $uploadDir . $uniqueFilename;
-            
+
             // Move uploaded file
             if (move_uploaded_file($fileTmpName, $uploadPath)) {
+                chmod($uploadPath, 0644);
+
                 // Add to database
                 $db = Database::getInstance();
                 $db->addImage($uniqueFilename);

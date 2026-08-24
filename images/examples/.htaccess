@@ -1,0 +1,24 @@
+# This directory holds admin-uploaded images and nothing else. Even if a
+# non-image ever lands here, it must never be executed by the web server.
+
+# Undo the PHP handler the document-root .htaccess registers.
+<IfModule mime_module>
+    RemoveHandler .php .php3 .php4 .php5 .php7 .php8 .phtml .phar
+    RemoveType .php .php3 .php4 .php5 .php7 .php8 .phtml .phar
+    AddType text/plain .php .php3 .php4 .php5 .php7 .php8 .phtml .phar
+</IfModule>
+
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>
+
+# Serve only image files from here.
+<FilesMatch "(?i)\.(jpe?g|png|gif|webp)$">
+    Require all granted
+</FilesMatch>
+
+<FilesMatch "(?i)\.(php[0-9]?|phtml|phar|cgi|pl|py|sh|htaccess)$">
+    Require all denied
+</FilesMatch>
+
+Options -Indexes -ExecCGI

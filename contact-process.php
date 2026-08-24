@@ -1,7 +1,10 @@
 <?php
-// Enable error reporting for debugging
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
+// This endpoint returns JSON, so errors must go to the log rather than into
+// the response body where they would both corrupt the payload and leak
+// filesystem paths to the caller.
+ini_set('display_errors', 0);
+ini_set('display_startup_errors', 0);
+ini_set('log_errors', 1);
 error_reporting(E_ALL);
 
 // Include secrets file
@@ -69,7 +72,8 @@ $context  = stream_context_create($options);
 $result = file_get_contents($recaptcha_url, false, $context);
 $result_json = json_decode($result, true);
 
-if (!$result_json['success'] || $result_json['score'] < $recaptcha_v3_threshold) {
+// A failed request to Google leaves $result === false; fail closed.
+if (empty($result_json['success']) || ($result_json['score'] ?? 0) < $recaptcha_v3_threshold) {
     // Log the failed attempt for monitoring
     error_log('reCAPTCHA verification failed. Score: ' . ($result_json['score'] ?? 'N/A'));
     echo json_encode(['success' => false, 'message' => 'reCAPTCHA verification failed. Please try again.']);
