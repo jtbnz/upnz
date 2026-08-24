@@ -39,3 +39,6 @@ Thumbs.db
 # Cache files
 cache/
 *.cache
+
+# Local archives (e.g. zipping assets to send to a supplier)
+*.zip
