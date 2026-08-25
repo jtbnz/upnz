@@ -59,7 +59,7 @@ $images = getExampleImages();
         <div class="container">
             <nav class="navbar">
                 <a href="index.html" class="logo" style="display: flex; align-items: center;">
-                    <img src="images/V-D-WOOD_black_high-res.png" alt="V D Wood Upholstery Logo" style="height: 40px; margin-right: 10px;">
+                    <img src="images/logo/vdwood-logo-black-320.png" alt="V D Wood Upholstery Logo" style="height: 40px; margin-right: 10px;">
                     V D Wood&nbsp;<span>Upholstery</span>
                 </a>
                 
@@ -222,7 +222,7 @@ $images = getExampleImages();
             </div>
             
             <div class="footer-bottom">
-                <img src="images/V-D-WOOD_black_high-res.png" alt="V D Wood Upholstery Logo" style="height: 50px; margin: 1rem auto;">
+                <img src="images/logo/vdwood-logo-black-320.png" alt="V D Wood Upholstery Logo" style="height: 50px; margin: 1rem auto;">
                 <p>&copy; 2025 V D Wood Upholstery. All Rights Reserved.</p>
                 <?php if (!isLoggedIn()): ?>
                 <div class="admin-link" style="margin-top: 10px;">
